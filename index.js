@@ -1,3 +1,24 @@
+function fit(container, minRatioW, minRatioH, maxRatioW, maxRatioH) {
+  let currentR = window.innerWidth / window.innerHeight;
+
+  let minR = minRatioW / minRatioH;
+  let maxR = maxRatioW / maxRatioH;
+
+  let clampedR = Math.min(Math.max(currentR, minR), maxR);
+
+  let width = window.innerWidth;
+  let height = width / clampedR;
+
+  if (height > window.innerHeight) {
+    width = Math.min(width, Math.ceil(window.innerHeight * clampedR));
+  }
+
+  height = Math.floor(width / clampedR);
+  
+  container.style.width = width + "px";
+  container.style.height = height + "px";
+}
+
 const buildUrl = "Build";
 const loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
 const config = {
@@ -43,6 +64,9 @@ script.src = loaderUrl;
 script.onload = () => {
   createUnityInstance(canvas, config, (progress) => {
     progressBarFill.style.width = `${100 * progress}%`;
+
+    const progressPercentage = document.querySelector("#progress-percentage");
+    progressPercentage.textContent = `${Math.round(100 * progress)}%`;
 
     if (scaleToFit == true)
       fitGameScreen();
