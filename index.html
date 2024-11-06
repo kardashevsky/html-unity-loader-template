@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>{{{ PRODUCT_NAME }}}</title>
+    <link rel="shortcut icon" href="TemplateData/logo.svg">
+    <link rel="stylesheet" href="TemplateData/styles.css">
+  </head>
+
+  <body>
+    <div id="unity-container">
+      <canvas id="unity-canvas" class="unity-canvas"></canvas>
+
+      <div id="canvas-overlay" class="canvas-overlay">
+        <div id="loading-page" class="loading-page">
+          <div class="loading-page__content">
+            <img src="TemplateData/logo.svg" class="logo">
+
+            <div class="progress-bar loading-page__progress-bar">
+              <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="TemplateData/fit.js"></script>
+    <script src="/TemplateData/game-loader.js"></script>
+  </body>
+</html>
