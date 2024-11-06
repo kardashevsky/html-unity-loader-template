@@ -1,15 +1,15 @@
 (function initializeWebApp() {
-  if (window.Telegram?.WebApp && Telegram.WebApp.initData && Telegram.WebApp.initData.length > 0) {
-    const webApp = Telegram.WebApp;
+  if (window.Telegram?.WebApp) {
+    const webApp = window.Telegram.WebApp;
     webApp.ready();
     const webAppData = getWebAppData();
 
     document.getElementById('show-data-btn').addEventListener('click', () => {
-      toggleWebAppData(webAppData);
+      sendWebAppData(webAppData);
     });
-  } else {
-    console.warn("Telegram WebApp is not available or running outside Telegram.");
-    alert("You are not running inside Telegram WebApp.");
+    } else {
+    console.warn("Telegram WebApp is not available.");
+    alert("Telegram WebApp is not available.");
   }
 })();
 
