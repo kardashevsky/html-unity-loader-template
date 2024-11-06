@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>{{{ PRODUCT_NAME }}}</title>
     <link rel="shortcut icon" href="assets/logo.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/index.css">
   </head>
 
   <body>
@@ -21,18 +21,12 @@
               <div id="progress-bar-fill" class="progress-bar-fill"></div>
             </div>
             <span id="progress-percentage" class="progress-percentage">0%</span>
-
-            <!-- Кнопка для вызова collectWebAppData -->
-            <button id="collect-data-btn" class="collect-data-btn">Collect WebApp Data</button>
           </div>
         </div>
       </div>
-
-      <!-- Контейнер для отображения собранных данных -->
-      <div id="data-display" class="data-display hidden"></div>
     </div>
 
-    <script src="telegram-init.js"></script>
-    <script src="index.js"></script>
+    <script src="js/telegram-init.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
