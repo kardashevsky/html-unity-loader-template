@@ -12,12 +12,17 @@ html, body, canvas {
 html, body {
     width: 100%;
     height: 100%;
-    overflow: visible;
+    overflow: hidden;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Onest', sans-serif;
+    background: #000 url('../assets/background.svg') no-repeat top center fixed;
+    background-size: auto;
+    background-attachment: fixed;
+    z-index: 0;
 }
 
 /* Стили для Unity-Canvas */
@@ -25,7 +30,8 @@ html, body {
     display: block;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: transparent;
+    z-index: 2;
 }
 
 /* Слой, накладывающийся на Canvas */
@@ -34,6 +40,7 @@ html, body {
     display: flex;
     width: 100%;
     height: 100%;
+    z-index: 3;
 }
 
 /* Основной контейнер загрузочной страницы */
@@ -43,8 +50,8 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
     flex-grow: 1;
+    z-index: 4;
 }
 
 /* Контент загрузочной страницы */
@@ -54,18 +61,25 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
 }
 
 /* Логотип */
 .logo {
-    max-width: 250px;
-    max-height: 250px;
+    position: absolute;
+    top: 4%;
+    pointer-events: none;
+    user-select: none;
+    touch-action: none;
+    -webkit-user-drag: none;
+    max-width: 123px;
+    max-height: 70px;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    margin-top: 4%;
+    z-index: 6;
 }
 
 /* Контейнер Unity */
@@ -74,45 +88,51 @@ html, body {
     display: flex;
     width: 100%;
     height: 100%;
+    z-index: 2;
 }
 
 /* Прогресс-бар на странице загрузки */
 .loading-page__progress-bar {
     width: 100%;
-    max-width: 325px;
+    max-width: 85%;
     min-height: 10px;
     position: relative;
-    top: 50%;
+    z-index: 5;
 }
 
 /* Базовый стиль прогресс-бара */
 .progress-bar {
-    position: relative;
+    position: absolute;
+    bottom: 8.5%;
     width: 100%;
     height: 10px;
     background: linear-gradient(90deg, #202A35 0%, #2A3E55 100%);
     border-radius: 119px;
     border: 3px solid #415D67;
     overflow: hidden;
+    z-index: 5;
 }
 
 /* Заполнение прогресс-бара */
 .progress-bar-fill {
-    width: 50%;
+    width: 100%;
     height: 100%;
     background: linear-gradient(90deg, #C8C3A4 0%, #C0FFE5 100%);
     border-radius: 119px;
+    z-index: 5;
 }
 
 /* Текст процента под прогресс-баром */
 .progress-percentage {
+    position: absolute;
+    bottom: 3.9%;
     font-size: 16px;
     color: #C1F9DE;
     font-family: Arial, sans-serif;
+    z-index: 5;
 }
 
 .collect-data-btn {
-    margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #007bff;
@@ -120,32 +140,72 @@ html, body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-.collect-data-btn:hover {
-background-color: #0056b3;
+    z-index: 6;
 }
 
 .hidden {
 display: none;
 }
 
-.data-display {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: white;
-padding: 20px;
-box-sizing: border-box;
-font-family: Arial, sans-serif;
-color: #333;
-overflow-y: auto;
+.text-comment {
+    position: absolute;
+    bottom: 14%;
+    font-size: 14px;
+    color: #FFCE50;
+    text-align: center;
+    width: 100%;
+    max-width: 75%;
+    pointer-events: none;
+    z-index: 5;
 }
 
-.data-display pre {
-background: #f4f4f4;
-padding: 10px;
-border-radius: 5px;
+#gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.gradient-overlay-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Обеспечивает, что SVG будет растянут по всему блоку, сохраняя пропорции */
+    opacity: 0.8; /* Можно оставить или изменить в зависимости от того, насколько прозрачное изображение нужно */
+}
+
+.female-asian {
+    position: absolute;
+    z-index: 2;
+    margin-right: -270px;
+    margin-top: 100px;
+}
+
+.female-blond {
+    position: absolute;
+    margin-left: -280px;
+    margin-top: 100px;
+    z-index: 2;
+}
+
+.male-white {
+    position: absolute;
+    z-index: 1;
+    margin-left: -120px;
+}
+
+.male-with-beard {
+    position: absolute;
+    z-index: 1;
+    margin-right: -100px;
+    margin-bottom: 10px;
+}
+
+.baloons {
+    position: absolute;
+    z-index: 3;
+    margin-bottom: 250px;
+    margin-left: 10px;
 }
