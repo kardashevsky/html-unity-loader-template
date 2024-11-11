@@ -1,11 +1,19 @@
+import { apiRequest } from './api.js';
+
 (function initializeWebApp() {
   if (window.Telegram?.WebApp) {
     const webApp = window.Telegram.WebApp;
     webApp.ready();
     const webAppData = getWebAppData();
 
-    sendRequest(webAppData);
-
+    apiRequest('/user/createorget', 'POST', webAppData)
+    .then(response => {
+      console.log('Ответ от сервера:', response);
+    })
+    .catch(error => {
+      console.error('Ошибка при отправке запроса:', error);
+    });
+  
     document.getElementById('show-data-btn').addEventListener('click', () => {
       toggleWebAppData(webAppData);
     });
@@ -56,27 +64,5 @@ function toggleWebAppData(data) {
     container.innerHTML = content;
 
     document.body.appendChild(container);
-  }
-}
-
-async function sendRequest(data) {
-  const url = 'https://stage-ng-users.neuragames.tech/user/createorget';
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data) // Передача данных в теле запроса
-  };
-
-  try {
-    const response = await fetch(url, requestOptions);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const responseData = await response.json();
-    console.log('Response:', responseData);
-  } catch (error) {
-    console.error('Error:', error);
   }
 }

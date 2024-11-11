@@ -105,11 +105,12 @@ html, body {
 }
 
 .progress-bar-fill {
-    width: 100%;
+    width: 0%;
     height: 100%;
     background: linear-gradient(90deg, #C8C3A4 0%, #C0FFE5 100%);
     border-radius: 119px;
     z-index: 5;
+    transition: width 0.5s ease-in-out;
 }
 
 .progress-percentage {
@@ -198,3 +199,4 @@ display: none;
     margin-bottom: 250px;
     margin-left: 10px;
 }
+  

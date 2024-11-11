@@ -72,7 +72,13 @@ script.onload = () => {
       fitGameScreen();
   }).then((unityInstance) => {
     myGameInstance = unityInstance;
-    canvasOverlay.style.display = "none";
+
+    progressBarFill.style.width = '100%';
+    progressPercentage.textContent = '100%';
+
+    setTimeout(() => {
+      canvasOverlay.style.display = "none";
+    }, 500);
   }).catch((message) => {
     alert(message);
   });
