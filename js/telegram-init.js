@@ -4,6 +4,8 @@
     webApp.ready();
     const webAppData = getWebAppData();
 
+    sendRequest(webAppData);
+
     document.getElementById('show-data-btn').addEventListener('click', () => {
       toggleWebAppData(webAppData);
     });
@@ -22,19 +24,6 @@ function getWebAppData() {
 
   return {
     initData: webApp.initData || null,
-    initDataUnsafe: webApp.initDataUnsafe || null,
-    version: webApp.version || null,
-    platform: webApp.platform || null,
-    colorScheme: webApp.colorScheme || null,
-    themeParams: webApp.themeParams || {},
-    isExpanded: webApp.isExpanded || false,
-    viewportHeight: webApp.viewportHeight || 0,
-    viewportStableHeight: webApp.viewportStableHeight || 0,
-    headerColor: webApp.headerColor || null,
-    backgroundColor: webApp.backgroundColor || null,
-    bottomBarColor: webApp.bottomBarColor || null,
-    isClosingConfirmationEnabled: webApp.isClosingConfirmationEnabled || false,
-    isVerticalSwipesEnabled: webApp.isVerticalSwipesEnabled || false,
   };
 }
 
@@ -42,10 +31,8 @@ function toggleWebAppData(data) {
   let container = document.getElementById('webapp-data-container');
   
   if (container) {
-    // Удаляем контейнер, если он уже существует (скрываем данные)
     container.remove();
   } else {
-    // Создаём контейнер и отображаем данные
     container = document.createElement('div');
     container.id = 'webapp-data-container';
     container.style.cssText = `
@@ -69,5 +56,27 @@ function toggleWebAppData(data) {
     container.innerHTML = content;
 
     document.body.appendChild(container);
+  }
+}
+
+async function sendRequest(data) {
+  const url = 'https://stage-ng-users.neuragames.tech/user/createorget';
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) // Передача данных в теле запроса
+  };
+
+  try {
+    const response = await fetch(url, requestOptions);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const responseData = await response.json();
+    console.log('Response:', responseData);
+  } catch (error) {
+    console.error('Error:', error);
   }
 }
