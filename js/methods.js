@@ -1,5 +1,3 @@
-// telegram-methods.js
-
 // Показать главную кнопку с текстом
 function showMainButton(text = "Click Me") {
   if (isTelegramWebAppAvailable()) {
@@ -96,7 +94,3 @@ function triggerTelegramHapticFeedback(type = "impact") {
     console.warn("Telegram WebApp HapticFeedback is not available.");
   }
 }
-
-document.getElementById('show-data-btn').addEventListener('click', () => {
-  triggerTelegramHapticFeedback('impact'); // Можете изменить тип на "notification" или "selection"
-});

@@ -1,74 +1,91 @@
-import fit from "fit.js";
+document.addEventListener("DOMContentLoaded", () => {
+  const content = document.querySelector(".loading-page__content");
+  const images = content.querySelectorAll("img");
 
-const buildUrl = "Build";
-const loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
-const config = {
-  dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
-  frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
-  codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
-#if MEMORY_FILENAME
-  memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
-#endif
-#if SYMBOLS_FILENAME
-  symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
-#endif
-  streamingAssetsUrl: "StreamingAssets",
-  companyName: "{{{ COMPANY_NAME }}}",
-  productName: "{{{ PRODUCT_NAME }}}",
-  productVersion: "{{{ PRODUCT_VERSION }}}",
-};
+  let loadedImagesCount = 0;
+  const totalImages = images.length;
 
-const container = document.querySelector("#unity-container");
-const canvas = document.querySelector("#unity-canvas");
-const progressBarFill = document.querySelector("#progress-bar-fill");
-const canvasOverlay = document.querySelector("#canvas-overlay");
+  const onImageLoad = () => {
+    loadedImagesCount++;
+    if (loadedImagesCount === totalImages) {
+      content.classList.add("visible");
+    }
+  };
 
-let scaleToFit;
-
-try {
-  scaleToFit = !!JSON.parse("{{{ SCALE_TO_FIT }}}");
-} catch (e) {
-  scaleToFit = false;
-}
-
-let fitGameScreen = () => {
-  if (scaleToFit == true)
-    fit(container, {{{MIN_RATIO_WIDTH}}}, {{{MIN_RATIO_HEIGHT}}}, {{{MAX_RATIO_WIDTH}}}, {{{MAX_RATIO_HEIGHT}}});
-};
-
-window.addEventListener('resize', fitGameScreen);
-
-let myGameInstance = null;
-
-const script = document.createElement("script");
-script.src = loaderUrl;
-script.onload = () => {
-  createUnityInstance(canvas, config, (progress) => {
-    progressBarFill.style.width = `${100 * progress}%`;
-
-    const progressPercentage = document.querySelector("#progress-percentage");
-    progressPercentage.textContent = `${Math.round(100 * progress)}%`;
-
-    if (scaleToFit == true)
-      fitGameScreen();
-  }).then((unityInstance) => {
-    myGameInstance = unityInstance;
-
-    progressBarFill.style.width = '100%';
-    progressPercentage.textContent = '100%';
-
-    setTimeout(() => {
-      canvasOverlay.style.display = "none";
-    }, 500);
-  }).catch((message) => {
-    alert(message);
+  images.forEach((img) => {
+    img.onload = onImageLoad;
+    img.onerror = onImageLoad;
   });
-};
-document.body.appendChild(script);
+});
 
-if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-  const meta = document.createElement('meta');
-  meta.name = 'viewport';
-  meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-  document.getElementsByTagName('head')[0].appendChild(meta);
+const BASE_URL = 'https://stage-ng-users.neuragames.tech';
+
+/**
+ * Generic function to make API requests.
+ * @param {string} endpoint - The API endpoint (e.g., "/user/create").
+ * @param {string} method - HTTP method (e.g., "POST", "GET", "PUT", "DELETE").
+ * @param {Object|null} data - Request body (if applicable).
+ * @param {Object} additionalHeaders - Additional headers for the request.
+ * @returns {Promise<Object>} - The response data from the API.
+ */
+export const apiRequest = async (endpoint, method = 'POST', data = null, additionalHeaders = {}) => {
+  const url = `${BASE_URL}${endpoint}`;
+
+  const headers = {
+    'Content-Type': 'application/json',
+    ...additionalHeaders,
+  };
+
+  const config = {
+    method,
+    headers,
+  };
+
+  if (data) {
+    config.body = JSON.stringify(data);
+  }
+
+  try {
+    const response = await fetch(url, config);
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(`Request error to ${url}:`, error);
+    throw error;
+  }
+};
+
+(function initializeWebApp() {
+  if (window.Telegram?.WebApp) {
+    const webApp = window.Telegram.WebApp;
+    webApp.ready();
+    const webAppData = getWebAppData();
+
+    apiRequest('/user/createorget', 'POST', webAppData)
+    .then(response => {
+      console.log('Ответ от сервера:', response);
+    })
+    .catch(error => {
+      console.error('Ошибка при отправке запроса:', error);
+    });
+  } else {
+    console.warn("Telegram WebApp is not available.");
+    alert("Telegram WebApp is not available.");
+  }
+})();
+
+function getWebAppData() {
+  if (!window.Telegram?.WebApp) {
+    return { error: "Telegram WebApp API is not available." };
+  }
+
+  const webApp = Telegram.WebApp;
+
+  return {
+    initData: webApp.initData || null,
+  };
 }
