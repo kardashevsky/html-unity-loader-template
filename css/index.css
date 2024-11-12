@@ -24,6 +24,14 @@ html, body {
     z-index: 0;
 }
 
+#unity-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
 .unity-canvas {
     display: block;
     width: 100%;
@@ -48,6 +56,58 @@ html, body {
     align-items: center;
     flex-grow: 1;
     z-index: 4;
+}
+
+.loading-page__bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -25px;
+    z-index: 6;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+    background: rgba(0, 0, 0, 0.01);
+    border: 1px solid #000000;
+    box-shadow: inset 0px 0px 19.2px 10px #000000;
+}
+
+.loading-page__top-gradient {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 90%;
+    background: linear-gradient(180deg, rgba(35, 35, 35, 0) 0%, rgba(15, 15, 20, 0.5) 35.28%, #111115 82.03%);
+    transform: rotate(-180deg);
+    z-index: 3;
+}
+
+.loading-page__gradient {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: -3.56%;
+    bottom: 16.98%;
+    background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0.4) 35.4%, rgba(0, 0, 0, 0.4) 65.68%, #000000 100%), rgba(17, 17, 17, 0.6);
+    opacity: 0.9;
+    z-index: 3;
+}
+
+.loading-page__bottom-gradient {
+    position: absolute;
+    width: 100%;
+    top: 52.48%;
+    bottom: 16.98%;
+    background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, #111111 69%);
+    z-index: 3;
+}
+
+.loading-page__friends-bottom-gradient {
+    position: absolute;
+    width: 100%;
+    height: 358px;
+    bottom: 10.37px;
+    background: linear-gradient(180.37deg, rgba(29, 29, 29, 0) 0.32%, rgba(17, 17, 17, 0.9) 48.51%, #020202 99.68%);
+    z-index: 6;
 }
 
 .loading-page__content {
@@ -76,65 +136,69 @@ html, body {
     z-index: 6;
 }
 
-#unity-container {
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: 100%;
+.female-asian {
+    position: absolute;
+    right: 12%;
+    top: 28%;
+    z-index: 4;
+    transform: translateX(50%);
+}
+
+.female-blond {
+    position: absolute;
+    left: 12%;
+    top: 30%;
     z-index: 2;
+    transform: translateX(-50%);
 }
 
-.loading-page__progress-bar {
-    width: 100%;
-    max-width: 85%;
-    min-height: 10px;
-    position: relative;
-    z-index: 5;
-}
-
-.progress-bar {
+.male-white {
     position: absolute;
-    bottom: 8.5%;
-    width: 100%;
-    height: 10px;
-    background: linear-gradient(90deg, #202A35 0%, #2A3E55 100%);
-    border-radius: 119px;
-    border: 3px solid #415D67;
-    overflow: hidden;
-    z-index: 5;
+    left: -11%;
+    top: 25%;
+    z-index: 1;
 }
 
-.progress-bar-fill {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #C8C3A4 0%, #C0FFE5 100%);
-    border-radius: 119px;
-    z-index: 5;
-    transition: width 0.5s ease-in-out;
-}
-
-.progress-percentage {
+.male-with-beard {
     position: absolute;
-    bottom: 3.9%;
-    font-size: 16px;
-    color: #C1F9DE;
-    font-family: Arial, sans-serif;
-    z-index: 5;
+    right: -25%;
+    top: 25%;
+    z-index: 1;
 }
 
-.collect-data-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 6;
+.baloons {
+    position: absolute;
+    left: 10%;
+    top: 13%;
+    z-index: 3;
 }
 
-.hidden {
-display: none;
+.female {
+    position: absolute;
+    left: 13%;
+    top: 49%;
+    z-index: 3;
+}
+
+.male {
+    position: absolute;
+    right: 15%;
+    top: 45%;
+    z-index: 3;
+}
+
+.thumb {
+    position: absolute;
+    right: 30%;
+    top: 60%;
+    z-index: 3;
+}
+
+.cat {
+    position: absolute;
+    left: 22%;
+    top: 55%;
+    z-index: 3;
 }
 
 .text-comment {
@@ -146,57 +210,44 @@ display: none;
     width: 100%;
     max-width: 75%;
     pointer-events: none;
-    z-index: 5;
+    z-index: 8;
 }
 
-#gradient-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
+.loading-page__progress-bar {
     width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
+    max-width: 85%;
+    min-height: 10px;
+    position: relative;
+    z-index: 8;
 }
 
-.gradient-overlay-image {
+.progress-bar {
+    position: absolute;
+    bottom: 8.5%;
     width: 100%;
+    height: 10px;
+    background: linear-gradient(90deg, #202A35 0%, #2A3E55 100%);
+    border-radius: 119px;
+    border: 3px solid #415D67;
+    overflow: hidden;
+    z-index: 8;
+}
+
+.progress-bar-fill {
+    width: 0%;
     height: 100%;
-    object-fit: cover;
-    opacity: 0.8;
+    background: linear-gradient(90deg, #C8C3A4 0%, #C0FFE5 100%);
+    border-radius: 119px;
+    z-index: 8;
+    transition: width 0.5s ease-in-out;
+    will-change: width;
 }
 
-.female-asian {
+.progress-percentage {
     position: absolute;
-    z-index: 2;
-    margin-right: -270px;
-    margin-top: 10vh;
+    bottom: 3.9%;
+    font-size: 16px;
+    color: #C1F9DE;
+    font-family: Arial, sans-serif;
+    z-index: 8;
 }
-
-.female-blond {
-    position: absolute;
-    margin-left: -280px;
-    margin-top: 100px;
-    z-index: 2;
-}
-
-.male-white {
-    position: absolute;
-    z-index: 1;
-    margin-left: -120px;
-}
-
-.male-with-beard {
-    position: absolute;
-    z-index: 1;
-    margin-right: -100px;
-    margin-bottom: 10px;
-}
-
-.baloons {
-    position: absolute;
-    z-index: 3;
-    margin-bottom: 250px;
-    margin-left: 10px;
-}
-  

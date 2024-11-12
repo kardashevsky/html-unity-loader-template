@@ -18,47 +18,36 @@
   <body>
     <div id="unity-container">
       <canvas id="unity-canvas" class="unity-canvas"></canvas>
+
       <div id="canvas-overlay" class="canvas-overlay">
         <div id="loading-page" class="loading-page">
+          <div class="loading-page__bg"></div>
+          <div class="loading-page__top-gradient"></div>
+          <div class="loading-page__gradient"></div>
+          <div class="loading-page__bottom-gradient"></div>
+          <div class="loading-page__friends-bottom-gradient"></div>
+          <img src="assets/logo.svg" class="logo" alt="Logo">
           <div class="loading-page__content">
-            <img src="assets/logo.svg" class="logo" alt="Logo">
-
-            <span id="text-comment" class="text-comment">Здесь ты можешь...</span>
-            <div class="progress-bar loading-page__progress-bar">
-              <div id="progress-bar-fill" class="progress-bar-fill"></div>
-            </div>
-            <span id="progress-percentage" class="progress-percentage">0%</span>
+            <img src="assets/female_asian.svg" class="female-asian" alt="Female Asian">
+            <img src="assets/female_blond.svg" class="female-blond" alt="Female Blond">
+            <img src="assets/male_white.svg" class="male-white" alt="Male White">
+            <img src="assets/male_with_beard.svg" class="male-with-beard" alt="Male with Beard">
+            <img src="assets/male.svg" class="male" alt="Male">
+            <img src="assets/female.svg" class="female" alt="Female">
+            <img src="assets/cat.svg" class="cat" alt="Cat">
+            <img src="assets/thumb.svg" class="thumb" alt="Thumb">
+            <img src="assets/baloons.svg" class="baloons" alt="Baloons">
           </div>
+          <span id="text-comment" class="text-comment">Здесь ты можешь развивать своего уникального Аватара, проходить квесты и зарабатывать, открывая новые возможности и стили. Твой путь к самопознанию и успеху начинается здесь!</span>
+
+          <div class="progress-bar loading-page__progress-bar">
+            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+          </div>
+
+          <span id="progress-percentage" class="progress-percentage">0%</span>
         </div>
       </div>
-
     </div>
-
-    <div id="gradient-overlay">
-      <img src="assets/gradient.svg" alt="Gradient Overlay" class="gradient-overlay-image">
-    </div>
-
-    <img src="assets/female_asian.svg" class="female-asian" alt="Female Asian">
-    <img src="assets/female_blond.svg" class="female-blond" alt="Female Blond">
-    <img src="assets/male_white.svg" class="male-white" alt="Male White">
-    <img src="assets/male_with_beard.svg" class="male-with-beard" alt="Male with Beard">
-    <img src="assets/baloons.svg" class="baloons" alt="Baloons">
-
-    <button id="show-data-btn" style="
-      position: fixed;
-      top: 40px;
-      left: 20px;
-      padding: 10px 20px;
-      font-size: 14px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 1001;
-    ">Data</button>
-
-    <script src="js/telegram-init.js" defer></script>
-    <script src="js/index.js" defer></script>
+    <script type="module"  src="js/index.js"></script>
   </body>
 </html>
