@@ -1,6 +1,7 @@
 // import { initializeWebApp } from './webApp.js';
 import initializeImageLoader from './imageLoader.js';
 // import { fit } from './fit.js';
+import { responseMock } from './api.js';
 
 // initializeWebApp();
 initializeImageLoader();
@@ -8,21 +9,45 @@ initializeImageLoader();
 document.addEventListener("DOMContentLoaded", () => {
   const content = document.querySelector(".loading-page__content");
   const images = content.querySelectorAll("img");
+  const textCommentElement = document.getElementById("text-comment");
+  const textSubheadingElement = document.getElementById("text-subheading");
+
+  console.log("Найденные изображения:", images);
+  console.log("Общее количество изображений:", images.length);
+
+  document.fonts.load('1rem "Onest"').then(() => {
+    textCommentElement.textContent = responseMock.commentText;
+    textCommentElement.classList.remove("hidden");
+    textSubheadingElement.textContent = responseMock.subheading;
+    textSubheadingElement.classList.remove("hidden");
+  });
 
   let loadedImagesCount = 0;
   const totalImages = images.length;
 
   const onImageLoad = () => {
     loadedImagesCount++;
+    console.log(`Изображение загружено (${loadedImagesCount}/${totalImages})`);
+    
     if (loadedImagesCount === totalImages) {
       content.classList.add("visible");
+      console.log("Все изображения успешно загружены.");
     }
   };
 
   images.forEach((img) => {
-    img.onload = onImageLoad;
-    img.onerror = onImageLoad;
-  });
+    if (img.complete) {
+      console.log(`Изображение уже загружено из кэша: ${img.src}`);
+      onImageLoad();
+    } else {
+      console.log(`Начата загрузка изображения: ${img.src}`);
+      img.onload = onImageLoad;
+      img.onerror = () => {
+        console.log(`Ошибка загрузки изображения: ${img.src}`);
+        onImageLoad(); // Учитываем изображение даже при ошибке
+      };
+    }
+  });  
 });
 
 // const buildUrl = "Build";

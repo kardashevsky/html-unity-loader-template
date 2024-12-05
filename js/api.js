@@ -1,5 +1,10 @@
 const BASE_URL = 'https://stage-ng-users.neuragames.tech';
 
+export const responseMock = {
+  "commentText": "Мир, где игровые квесты сочетаются с реальной пользой. Мы создаем экосистему, которая работает для тебя!",
+  "subheading": "play learn earn"
+};
+
 /**
  * Generic function to make API requests.
  * @param {string} endpoint - The API endpoint (e.g., "/user/create").

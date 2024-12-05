@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>{{{ PRODUCT_NAME }}}</title>
+    <link rel="preload" href="assets/fonts/Onest-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/index.css">
     <link rel="shortcut icon" href="" type="image/svg+xml">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -21,6 +22,7 @@
           <div class="loading-page__bottom-gradient"></div>
           <div class="loading-page__friends-bottom-gradient"></div>
           <img src="assets/logo.svg" class="logo" alt="Logo">
+          <span id="text-subheading" class="text-subheading hidden"></span>
           <div class="loading-page__content">
             <img src="assets/female_asian.png" class="female-asian" alt="Female Asian">
             <img src="assets/female_blond.png" class="female-blond" alt="Female Blond">
@@ -33,9 +35,9 @@
             <img src="assets/baloons.svg" class="baloons" alt="Baloons">
             <img src="assets/baloon_1.svg" class="baloon-1" alt="Baloon 1">
             <img src="assets/baloon_2.svg" class="baloon-2" alt="Baloon 2">
-            <img src="assets/baloon_3.svg" class="baloon-3" alt="Baloon 3">
           </div>
-          <span id="text-comment" class="text-comment">Здесь ты можешь развивать своего уникального Аватара, проходить квесты и зарабатывать, открывая новые возможности и стили. Твой путь к самопознанию и успеху начинается здесь!</span>
+
+          <span id="text-comment" class="text-comment hidden"></span>
 
           <div class="progress-bar loading-page__progress-bar">
             <div id="progress-bar-fill" class="progress-bar-fill"></div>
