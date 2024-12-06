@@ -1,3 +1,5 @@
+@import url('../assets/background.png');
+
 /* Универсальные настройки для отключения выделения текста */
 html, body, canvas {
     -webkit-touch-callout: none; /* iOS Safari */

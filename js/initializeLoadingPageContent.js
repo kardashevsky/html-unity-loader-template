@@ -28,22 +28,24 @@ export default function initializeLoadingPageContent(responseMock) {
       return;
     }
 
-    let loadedImagesCount = 0;
-
-    const onImageLoad = () => {
-      loadedImagesCount++;
-      if (loadedImagesCount === totalImages) {
-        content.classList.add("visible");
-      }
+    const preloadImage = (src) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = resolve;
+        img.onerror = reject;
+      });
     };
 
-    images.forEach((img) => {
-      if (img.complete) {
-        onImageLoad();
-      } else {
-        img.onload = onImageLoad;
-        img.onerror = onImageLoad;
-      }
-    });
+    const imageSources = Array.from(images).map((img) => img.src);
+
+    Promise.all(imageSources.map(preloadImage))
+      .then(() => {
+        content.classList.add("visible");
+        console.log("Все изображения успешно предзагружены.");
+      })
+      .catch((error) => {
+        console.error("Ошибка при предзагрузке изображений:", error);
+      });
   });
 }

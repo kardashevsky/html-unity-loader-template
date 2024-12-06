@@ -1,4 +1,4 @@
-import { fit } from './fit.js';
+import fit from './fit.js';
 
 const buildUrl = "Build";
 const loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
@@ -46,7 +46,6 @@ script.src = loaderUrl;
 script.onload = () => {
   createUnityInstance(canvas, config, (progress) => {
     progressBarFill.style.width = `${100 * progress}%`;
-
     const progressPercentage = document.querySelector("#progress-percentage");
     progressPercentage.textContent = `${Math.round(100 * progress)}%`;
 
@@ -54,7 +53,6 @@ script.onload = () => {
       fitGameScreen();
   }).then((unityInstance) => {
     myGameInstance = unityInstance;
-
     progressBarFill.style.width = '100%';
     progressPercentage.textContent = '100%';
 
