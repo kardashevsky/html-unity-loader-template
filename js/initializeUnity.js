@@ -51,9 +51,9 @@ script.onload = () => {
   }
 
   createUnityInstance(canvas, config, (progress) => {
-    progressBarFill.style.width = `${100 * progress}%`;
-    const progressPercentage = document.querySelector("#progress-percentage");
-    progressPercentage.textContent = `${Math.round(100 * progress)}%`;
+    const percentage = Math.round(100 * progress);
+    progressBarFill.style.width = `${percentage}%`;
+    progressPercentage.textContent = `${percentage}%`;
 
     if (scaleToFit == true)
       fitGameScreen();
