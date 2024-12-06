@@ -1,4 +1,4 @@
-export default function initializeImageLoader() {
+export default function initializeLoadingPageContent(responseMock) {
   document.addEventListener("DOMContentLoaded", () => {
     const content = document.querySelector(".loading-page__content");
 
@@ -9,6 +9,18 @@ export default function initializeImageLoader() {
 
     const images = content.querySelectorAll("img");
     const totalImages = images.length;
+
+    const textCommentElement = document.getElementById("text-comment");
+    const textSubheadingElement = document.getElementById("text-subheading");
+
+    document.fonts.load('1rem "Onest"').then(() => {
+      if (textCommentElement && textSubheadingElement) {
+        textCommentElement.textContent = responseMock.commentText;
+        textCommentElement.classList.remove("hidden");
+        textSubheadingElement.textContent = responseMock.subheading;
+        textSubheadingElement.classList.remove("hidden");
+      }
+    });
 
     if (totalImages === 0) {
       console.warn("No images found, showing content immediately.");
@@ -27,7 +39,7 @@ export default function initializeImageLoader() {
 
     images.forEach((img) => {
       if (img.complete) {
-        onImageLoad(); // Обработать уже загруженные изображения
+        onImageLoad();
       } else {
         img.onload = onImageLoad;
         img.onerror = onImageLoad;
