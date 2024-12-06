@@ -168,6 +168,18 @@ html, body {
     opacity: 1;
 }
 
+#product-version {
+    font-family: 'Onest';
+    position: absolute;
+    font-size: 12px;
+    color: #ADFFAF;
+    text-align: center;
+    top: 7%;
+    width: 100%;
+    z-index: 9;
+    display: block;
+}
+
 .hidden {
     opacity: 0;
     transition: opacity 1.5s ease-in-out;

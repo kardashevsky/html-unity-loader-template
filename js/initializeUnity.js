@@ -24,6 +24,8 @@ const canvas = document.querySelector("#unity-canvas");
 const progressBarFill = document.querySelector("#progress-bar-fill");
 const canvasOverlay = document.querySelector("#canvas-overlay");
 const progressPercentage = document.querySelector("#progress-percentage");
+const productVersionElement = document.querySelector("#product-version");
+
 let myGameInstance = null;
 let scaleToFit;
 
@@ -43,6 +45,11 @@ window.addEventListener('resize', fitGameScreen);
 const script = document.createElement("script");
 script.src = loaderUrl;
 script.onload = () => {
+
+  if (productVersionElement) {
+    productVersionElement.textContent = `v ${config.productVersion}`;
+  }
+
   createUnityInstance(canvas, config, (progress) => {
     progressBarFill.style.width = `${100 * progress}%`;
     const progressPercentage = document.querySelector("#progress-percentage");
