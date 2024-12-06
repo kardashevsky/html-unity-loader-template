@@ -24,7 +24,7 @@ const canvas = document.querySelector("#unity-canvas");
 const progressBarFill = document.querySelector("#progress-bar-fill");
 const canvasOverlay = document.querySelector("#canvas-overlay");
 const progressPercentage = document.querySelector("#progress-percentage");
-
+let myGameInstance = null;
 let scaleToFit;
 
 try {
@@ -39,8 +39,6 @@ let fitGameScreen = () => {
 };
 
 window.addEventListener('resize', fitGameScreen);
-
-let myGameInstance = null;
 
 const script = document.createElement("script");
 script.src = loaderUrl;
