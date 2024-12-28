@@ -1,24 +1,20 @@
-const BASE_URL = 'https://stage-ng-users.neuragames.tech';
+import { playerData, translationsData } from  './mockData.js';
 
-export const responseMock = {
-  "commentText": "Мир, где игровые квесты сочетаются с реальной пользой. Мы создаем экосистему, которая работает для тебя!",
-  "subheading": "play learn earn"
-};
+const BASE_URL_USERS_API = 'https://stage-ma-ng-users.neuragames.tech';
+const BASE_URL_CONTENT_API = 'https://stage-ma-ng-content.neuragames.tech';
 
-/**
- * Generic function to make API requests.
- * @param {string} endpoint - The API endpoint (e.g., "/user/create").
- * @param {string} method - HTTP method (e.g., "POST", "GET", "PUT", "DELETE").
- * @param {Object|null} data - Request body (if applicable).
- * @param {Object} additionalHeaders - Additional headers for the request.
- * @returns {Promise<Object>} - The response data from the API.
- */
-export const apiRequest = async (endpoint, method = 'POST', data = null, additionalHeaders = {}) => {
-  const url = `${BASE_URL}${endpoint}`;
+export const apiRequest = async (baseUrl, endpoint, method, data = null) => {
+  const initData = localStorage.getItem('initData');
+
+  if (!initData) {
+    throw new Error('initData is missing in localStorage');
+  }
+
+  const url = `${baseUrl}${endpoint}`;
 
   const headers = {
     'Content-Type': 'application/json',
-    ...additionalHeaders,
+    'TelegramAuthorization': initData,
   };
 
   const config = {
@@ -40,6 +36,41 @@ export const apiRequest = async (endpoint, method = 'POST', data = null, additio
     return await response.json();
   } catch (error) {
     console.error(`Request error to ${url}:`, error);
+    throw error;
+  }
+};
+
+export const getPlayerData = async () => {
+  try {
+    // const playerData = await apiRequest(BASE_URL_USERS_API, '/player', 'GET');
+    
+    localStorage.setItem('playerData', JSON.stringify(playerData));
+
+    return playerData;
+  } catch (error) {
+    console.error('Error fetching player data:', error);
+    throw error;
+  }
+};
+
+export const getTranslations = async (languageCode) => {
+  try {
+    const requestBody = {
+      language: languageCode,
+    };
+
+    // const translationsData = await apiRequest(BASE_URL_CONTENT_API, '/translations', 'POST', requestBody);
+
+    localStorage.setItem('translationsData', JSON.stringify(translationsData));
+
+    const textLoaderContent = {
+      subheading: translationsData.find(item => item.id === 'screen00_subheading')?.text || '',
+      commentText: translationsData.find(item => item.id === 'screen00_heading')?.text || ''
+    };
+
+    return textLoaderContent;
+  } catch (error) {
+    console.error('Error fetching player data:', error);
     throw error;
   }
 };

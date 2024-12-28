@@ -43,6 +43,7 @@ export async function setViewportForMobile() {
     timeZone,
   };
 
-  console.log(deviceInfo);
+  localStorage.setItem('deviceInfo', JSON.stringify(deviceInfo));
+
   return deviceInfo;
 }
