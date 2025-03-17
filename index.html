@@ -33,14 +33,15 @@
     <script>
       document.getElementById('shareBtn').onclick = function () {
         const mediaUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Fronalpstock_big.jpg/800px-Fronalpstock_big.jpg"; // 100% рабочая ссылка на изображение
-        
+
         const options = {
+          text: "Как вам мой аватар?",
           widget_link: {
-            url: "https://www.google.com/",
-            name: "Google"
+            url: "https://t.me/genza_game_stage_bot",
+            name: "Хочешь так же?"
           }
         };
-  
+
         if (Telegram.WebApp && Telegram.WebApp.shareToStory) {
           try {
             Telegram.WebApp.shareToStory(mediaUrl, options);
