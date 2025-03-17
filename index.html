@@ -15,7 +15,7 @@
   
     <script>
       document.getElementById('shareBtn').onclick = function () {
-        const mediaUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"; // Замени на HTTPS URL картинки
+        const mediaUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg";
         const options = {
           text: "Check out this cool image!",
           widget_link: {
@@ -24,16 +24,15 @@
           }
         };
   
-        try {
-          Telegram.WebApp.shareToStory(mediaUrl, options)
-            .then(() => {
-              alert('Story shared successfully!');
-            })
-            .catch((err) => {
-              alert('Error sharing story: ' + err.message);
-            });
-        } catch (e) {
-          alert('Exception: ' + e.message);
+        if (Telegram.WebApp && Telegram.WebApp.shareToStory) {
+          try {
+            Telegram.WebApp.shareToStory(mediaUrl, options);
+            alert('Story editor opened!');
+          } catch (e) {
+            alert('Exception: ' + e.message);
+          }
+        } else {
+          alert('Telegram WebApp API is not available!');
         }
       };
     </script>
