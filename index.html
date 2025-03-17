@@ -35,8 +35,10 @@
         const mediaUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Fronalpstock_big.jpg/800px-Fronalpstock_big.jpg"; // 100% рабочая ссылка на изображение
         
         const options = {
-          text: "Just a test image!"
-          // widget_link убираем для теста
+          widget_link: {
+            url: "https://www.google.com/",
+            name: "Google"
+          }
         };
   
         if (Telegram.WebApp && Telegram.WebApp.shareToStory) {
