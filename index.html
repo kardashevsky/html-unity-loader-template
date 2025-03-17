@@ -44,7 +44,6 @@
         if (Telegram.WebApp && Telegram.WebApp.shareToStory) {
           try {
             Telegram.WebApp.shareToStory(mediaUrl, options);
-            alert('Story editor opened!');
           } catch (e) {
             alert('Exception: ' + e.message);
           }
