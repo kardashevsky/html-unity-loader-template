@@ -3,52 +3,39 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>{{{ PRODUCT_NAME }}}</title>
+    <title>Telegram Story Test</title>
     <link rel="preload" href="assets/fonts/Onest-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/index.css">
     <link rel="shortcut icon" href="" type="image/svg+xml">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
 
   <body>
-    <div id="unity-container">
-      <canvas id="unity-canvas" class="unity-canvas"></canvas>
-
-      <div id="canvas-overlay" class="canvas-overlay">
-        <div id="loading-page" class="loading-page">
-          <div class="loading-page__bg"></div>
-          <div class="loading-page__top-gradient"></div>
-          <div class="loading-page__gradient"></div>
-          <div class="loading-page__bottom-gradient"></div>
-          <div class="loading-page__friends-bottom-gradient"></div>
-          <img src="assets/logo.svg" class="logo" alt="Logo">
-          <span id="text-subheading" class="text-subheading hidden"></span>
-          <span id="product-version" class="product-version"></span>
-          <div class="loading-page__content">
-            <img src="assets/female_asian.png" class="female-asian" alt="Female Asian">
-            <img src="assets/female_blond.png" class="female-blond" alt="Female Blond">
-            <img src="assets/male_white.png" class="male-white" alt="Male White">
-            <img src="assets/male_with_beard.png" class="male-with-beard" alt="Male with Beard">
-            <img src="assets/male.png" class="male" alt="Male">
-            <img src="assets/female.png" class="female" alt="Female">
-            <img src="assets/cat.png" class="cat" alt="Cat">
-            <img src="assets/thumb.png" class="thumb" alt="Thumb">
-            <img src="assets/baloons.svg" class="baloons" alt="Baloons">
-            <img src="assets/baloon_1.svg" class="baloon-1" alt="Baloon 1">
-            <img src="assets/baloon_2.svg" class="baloon-2" alt="Baloon 2">
-          </div>
-
-          <span id="text-comment" class="text-comment hidden"></span>
-
-          <div class="progress-bar loading-page__progress-bar">
-            <div id="progress-bar-fill" class="progress-bar-fill"></div>
-          </div>
-
-          <span id="progress-percentage" class="progress-percentage">0%</span>
-        </div>
-      </div>
-    </div>
-    <script type="module" src="js/index.js"></script>
-    <script type="module" src="js/initializeUnity.js"></script>
+    <h1>Telegram Story Test</h1>
+    <button id="shareBtn">Share to Telegram Story</button>
+  
+    <script>
+      document.getElementById('shareBtn').onclick = function () {
+        const mediaUrl = "https://example.com/image.jpg"; // Замени на HTTPS URL картинки
+        const options = {
+          text: "Check out this cool image!",
+          widget_link: {
+            url: "https://example.com",
+            name: "My Link"
+          }
+        };
+  
+        try {
+          Telegram.WebApp.shareToStory(mediaUrl, options)
+            .then(() => {
+              alert('Story shared successfully!');
+            })
+            .catch((err) => {
+              alert('Error sharing story: ' + err.message);
+            });
+        } catch (e) {
+          alert('Exception: ' + e.message);
+        }
+      };
+    </script>
   </body>
 </html>
